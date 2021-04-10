@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+  <head>
+    <title>SceneryLens</title>
+  </head>
+  <body>
+    <h1>Upload your image</h1>
+    <form method="POST" action={{ url_for('results') }} enctype="multipart/form-data">
+      <p><input type="file" name="file"></p>
+      <p><input type="submit" value="Submit"></p>
+    </form>
+  </body>
+</html>
