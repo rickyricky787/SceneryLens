@@ -1,13 +1,47 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Architects+Daughter" />
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
     <title>SceneryLens</title>
   </head>
-  <body>
-    <h1>Upload your image</h1>
+  <body class=center>
+    <h1 class="title is-size-1-desktop" style="font-family:Architects Daughter;" >SceneryLens</h1>
+
     <form method="POST" action={{ url_for('results') }} enctype="multipart/form-data">
-      <p><input type="file" name="file"></p>
-      <p><input type="submit" value="Submit"></p>
+      
+      <div id="file-upload-icon" class="file has-name columns is-centered">
+        <label class="file-label">
+          <input class="file-input" type="file" name="file">
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fas fa-upload"></i>
+            </span>
+            <span class="file-label">
+              Choose a file…
+            </span>
+          </span>
+          <span class="file-name">
+            No file uploaded
+          </span>
+        </label>
+      </div>
+
+      <p><input class="button is-primary" type="submit" value="Submit"></p>
     </form>
+    {% block content %}{% endblock %}
+    <script>
+      const fileInput = document.querySelector('#file-upload-icon input[type=file]');
+      fileInput.onchange = () => {
+        if (fileInput.files.length > 0) {
+          const fileName = document.querySelector('#file-upload-icon .file-name');
+          fileName.textContent = fileInput.files[0].name;
+        }
+      }
+    </script>
   </body>
 </html>

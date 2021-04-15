@@ -15,7 +15,7 @@ def index():
     return render_template("index.html")
 
 # Route for results page
-@app.route("/results", methods=['POST'])
+@app.route("/", methods=['POST'])
 def results():
     uploaded_img = request.files["file"]
     img_name = uploaded_img.filename
