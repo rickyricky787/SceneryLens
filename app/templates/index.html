@@ -9,31 +9,53 @@
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
     <title>SceneryLens</title>
   </head>
-  <body class=center>
-    <h1 class="title is-size-1-desktop" style="font-family:Architects Daughter;" >SceneryLens</h1>
-
-    <form method="POST" action={{ url_for('results') }} enctype="multipart/form-data">
-      
-      <div id="file-upload-icon" class="file has-name columns is-centered">
-        <label class="file-label">
-          <input class="file-input" type="file" name="file">
-          <span class="file-cta">
-            <span class="file-icon">
-              <i class="fas fa-upload"></i>
-            </span>
-            <span class="file-label">
-              Choose a file…
-            </span>
-          </span>
-          <span class="file-name">
-            No file uploaded
-          </span>
-        </label>
+  <body>
+    <div class="site-container">
+      <section class="hero is-primary is-small">
+        <div class="hero-body">
+          <p class="title has-text-centered" style="font-family:Architects Daughter;">
+            SceneryLens
+          </p>
+        </div>
+      </section>
+      <div class="center site-content">
+        <div class="py-5">
+          <h4 class="is-size-5-desktop"> Predict the scenery of an image </h4>
+        </div>
+    
+        <form method="POST" action={{ url_for('results') }} enctype="multipart/form-data">
+          
+          <div id="file-upload-icon" class="file has-name columns is-centered">
+            <label class="file-label">
+              <input class="file-input" type="file" name="file">
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Choose a file…
+                </span>
+              </span>
+              <span class="file-name">
+                No file uploaded
+              </span>
+            </label>
+          </div>
+    
+          <p><input class="button is-primary" type="submit" value="Submit"></p>
+        </form>
+        {% block content %}{% endblock %}
       </div>
+      <footer class="columns has-text-centered">
+          <div class="column">
+            Github
+          </div>
+          <div class="column">
+            List of labels
+          </div>
+      </footer>
+    </div>
 
-      <p><input class="button is-primary" type="submit" value="Submit"></p>
-    </form>
-    {% block content %}{% endblock %}
     <script>
       const fileInput = document.querySelector('#file-upload-icon input[type=file]');
       fileInput.onchange = () => {
@@ -43,5 +65,6 @@
         }
       }
     </script>
+
   </body>
 </html>

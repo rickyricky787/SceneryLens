@@ -1,6 +1,33 @@
 {% extends "index.html" %}
 {% block content %}
 
-<p>Uploaded</p>
-<img src=" {{url_for('display_image', img_name = filename)}}" width="500">
+<div class="columns py-5">
+    <div class="column">
+        <img src=" {{url_for('display_image', img_name = filename)}}" width="500">
+    </div>
+    <div class="column">
+        <table class="table is-fullwidth">
+            <thead>
+              <tr>
+                <th>Label</th>
+                <th>Accuracy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Three</td>
+                <td>Four</td>
+              </tr>
+              <tr>
+                <td>Five</td>
+                <td>Six</td>
+              </tr>
+              <tr>
+                <td>Five</td>
+                <td>Six</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>
 {% endblock %}
