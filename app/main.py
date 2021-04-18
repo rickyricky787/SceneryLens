@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, abort, flash
+from flask import Flask, render_template, request, abort
 import io
 from PIL import Image
 import base64
@@ -24,7 +24,7 @@ def results():
     uploaded_img = request.files["file"]
     img_name = uploaded_img.filename
 
-    # Saves image if something was uploaded
+    # Checks for the filetype of the file uploaded
     if img_name != "":
         file_ext = os.path.splitext(img_name)[1]
         
