@@ -23,3 +23,12 @@ footer {
     background-color: hsl(171, 100%, 41%);
     color: white;
 }
+
+a {
+    color: white;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: white;
+  }

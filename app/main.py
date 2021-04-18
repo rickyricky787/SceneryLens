@@ -1,5 +1,9 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory, after_this_request, abort
+from flask import Flask, render_template, request, abort, flash
+import io
+from PIL import Image
+import base64
+
 
 app = Flask(__name__)
 
@@ -22,27 +26,22 @@ def results():
 
     # Saves image if something was uploaded
     if img_name != "":
-        uploaded_img.save("images/" + img_name)
         file_ext = os.path.splitext(img_name)[1]
         
         # Checks for file extensions
         if file_ext not in app.config['UPLOAD_EXTENSIONS']:
-            os.remove("images/" + img_name)
             abort(415) # Unsorported media type
-    
-    # Do prediction stuff somewhere here
+    else:
+        return render_template("index.html")
 
+    im = Image.open(uploaded_img)
 
-    return render_template("results.html", filename = img_name)
+    # Do prediction stuff starting from here
+    # image_data = np.asarray(image).copy() # Equivalent to imread(image_file)
 
-# Route for displaying image on the results page
-@app.route("/upload/<img_name>")
-def display_image(img_name):
+    # For rendering image
+    data = io.BytesIO()
+    im.save(data, "PNG")    # Saves image in-memory, no need to save it into a folder.
+    encoded_img_data = base64.b64encode(data.getvalue())
 
-    # Delete file immediately after the page has been rendered
-    @after_this_request
-    def remove_file(response):
-        os.remove("images/" + img_name)
-        return response
-        
-    return send_from_directory("images", img_name)
+    return render_template("results.html", img_data = encoded_img_data.decode('utf-8'))

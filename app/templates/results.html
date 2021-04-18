@@ -3,7 +3,8 @@
 
 <div class="columns py-5">
     <div class="column">
-        <img src=" {{url_for('display_image', img_name = filename)}}" width="500">
+      <!--Rendering image-->
+        <img src="data:image/png;base64,{{ img_data }}" width="500">
     </div>
     <div class="column">
         <table class="table is-fullwidth">
@@ -15,16 +16,12 @@
             </thead>
             <tbody>
               <tr>
-                <td>Three</td>
-                <td>Four</td>
+                <td>Beach</td>
+                <td>80 %</td>
               </tr>
               <tr>
-                <td>Five</td>
-                <td>Six</td>
-              </tr>
-              <tr>
-                <td>Five</td>
-                <td>Six</td>
+                <td>Sky</td>
+                <td>40 %</td>
               </tr>
             </tbody>
         </table>

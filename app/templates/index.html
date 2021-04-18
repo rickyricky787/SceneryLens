@@ -20,7 +20,8 @@
       </section>
       <div class="center site-content">
         <div class="py-5">
-          <h4 class="is-size-5-desktop"> Predict the scenery of an image </h4>
+          <h4 class="is-size-5-desktop"> Detect the outdoor scenery of an image</h4>
+          <p>*22 scene categories available*</p>
         </div>
     
         <form method="POST" action={{ url_for('results') }} enctype="multipart/form-data">
@@ -42,17 +43,12 @@
             </label>
           </div>
     
-          <p><input class="button is-primary" type="submit" value="Submit"></p>
+          <p><input class="button is-primary" type="submit" value="Submit" onclick="startProcessing()"></p>
         </form>
         {% block content %}{% endblock %}
       </div>
-      <footer class="columns has-text-centered">
-          <div class="column">
-            Github
-          </div>
-          <div class="column">
-            List of labels
-          </div>
+      <footer class="has-text-centered py-2">
+        <a href="https://github.com/rickyricky787/SceneryLens" target="_blank">Github</a>
       </footer>
     </div>
 
@@ -64,6 +60,13 @@
           fileName.textContent = fileInput.files[0].name;
         }
       }
+
+      function startProcessing() {
+        if (fileInput.files.length == 0) {
+          alert("No image was uploaded!");
+        }
+      }
+
     </script>
 
   </body>
