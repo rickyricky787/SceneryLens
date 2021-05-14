@@ -14,7 +14,7 @@
       <section class="hero is-primary is-small">
         <div class="hero-body">
           <p class="title has-text-centered" style="font-family:Architects Daughter;">
-            SceneryLens
+            <a href={{ url_for("index") }}>SceneryLens</a>
           </p>
         </div>
       </section>
@@ -24,7 +24,7 @@
           <p>*20 scene categories available*</p>
         </div>
     
-        <form method="POST" action={{ url_for('results') }} enctype="multipart/form-data">
+        <form method="POST" action={{ url_for("results") }} enctype="multipart/form-data">
           
           <div id="file-upload-icon" class="file has-name columns is-centered">
             <label class="file-label">
@@ -43,7 +43,10 @@
             </label>
           </div>
     
-          <p><input class="button is-primary" type="submit" value="Submit" onclick="startProcessing()"></p>
+          <p>
+            <input class="button is-primary" type="submit" value="Submit" onclick="startProcessing()">
+            <button class="button is-light" onclick="listOfSceneries()">See list of sceneries</button>
+          </p>
         </form>
         {% block content %}{% endblock %}
       </div>
@@ -66,6 +69,17 @@
         if (fileInput.files.length == 0) {
           alert("No image was uploaded!");
         }
+      }
+
+      // For displaying list of sceneries
+      function listOfSceneries() {
+        alert(
+          "List of sceneries:\n" +
+          "alley - bridge - canyon - desert - downtown - " + 
+          "forest - grotto - iceberg - lake - mountain - " + 
+          "ocean - park - rock arch - ruin - sky - " + 
+          "skyscraper - snowfield - street - village - waterfall"
+          );
       }
 
     </script>
