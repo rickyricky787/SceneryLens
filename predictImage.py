@@ -1,5 +1,7 @@
 import numpy as np
-import tensorflow as tf
+from tensorflow.keras.models import model_from_json
+from tensorflow.keras.preprocessing.image import img_to_array
+from tensorflow.keras.applications.xception import preprocess_input
 from PIL import Image
 
 def predictImage(img):
@@ -9,7 +11,7 @@ def predictImage(img):
     with open('model/xception_model.json', 'r') as f:
         model_json = f.read()
 
-    model = tf.keras.models.model_from_json(model_json)
+    model = model_from_json(model_json)
 
     # Add weights
     model.load_weights('model/xception_weights.h5')
@@ -27,10 +29,10 @@ def predictImage(img):
     new_img = img.resize(size)
 
     # Process the image
-    input_arr = tf.keras.preprocessing.image.img_to_array(new_img)
+    input_arr = img_to_array(new_img)
     img_batch = np.expand_dims(input_arr, axis=0)
     
-    image_preprocessed = tf.keras.applications.resnet_v2.preprocess_input(img_batch)
+    image_preprocessed = preprocess_input(img_batch)
 
     # Predict image
     y_preds = model.predict(image_preprocessed)

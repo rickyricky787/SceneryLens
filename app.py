@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, request, abort
-import io
+from io import BytesIO
 from PIL import Image
 import base64
 from predictImage import predictImage
@@ -43,7 +43,7 @@ def results():
     pred_label, pred_score = predictImage(im)
 
     # For rendering image
-    data = io.BytesIO()
+    data = BytesIO()
     im.save(data, "PNG")    # Saves image in-memory, no need to save it into a folder.
     encoded_img_data = base64.b64encode(data.getvalue())
 
