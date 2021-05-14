@@ -20,7 +20,7 @@ def predictImage(img):
     labels = [
         "alley", "bridge", "canyon", "desert", "downtown", 
         "forest", "grotto", "iceberg", "lake", "mountain", 
-        "ocean", "park", "rock_arch", "ruin", "sky", 
+        "ocean", "park", "rock arch", "ruin", "sky", 
         "skyscraper", "snowfield", "street", "village", "waterfall"
     ]
     
