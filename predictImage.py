@@ -6,8 +6,6 @@ from PIL import Image
 
 def predictImage(img):
     # Load model
-    model_json = None
-
     with open('model/xception_model.json', 'r') as f:
         model_json = f.read()
 
@@ -18,14 +16,14 @@ def predictImage(img):
 
     # Array of labels
     labels = [
-        "alley", "bridge", "canyon", "desert", "downtown", 
-        "forest", "grotto", "iceberg", "lake", "mountain", 
-        "ocean", "park", "rock arch", "ruin", "sky", 
-        "skyscraper", "snowfield", "street", "village", "waterfall"
+        "Alley", "Bridge", "Canyon", "Desert", "Downtown", 
+        "Forest", "Grotto", "Iceberg", "Lake", "Mountain", 
+        "Ocean", "Park", "Rock Arch", "Ruin", "Sky", 
+        "Snowfield", "Street", "Tower", "Village", "Waterfall"
     ]
     
     # Resize image
-    size = (128, 128)
+    size = (256, 256)
     new_img = img.resize(size)
 
     # Process the image

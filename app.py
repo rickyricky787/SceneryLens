@@ -3,8 +3,13 @@ from flask import Flask, render_template, request, abort
 from io import BytesIO
 from PIL import Image
 import base64
+import json
+import random
 from predictImage import predictImage
 
+# Fetching facts from json
+with open('facts.json') as f:
+  facts = json.load(f)
 
 app = Flask(__name__)
 
@@ -39,8 +44,12 @@ def results():
     im = im.convert("RGB")
 
     # Do prediction stuff starting from here
-    # image_data = np.asarray(image).copy() # Equivalent to imread(image_file)
-    pred_label, pred_score = predictImage(im)
+    # pred_tables = tuple of three strings
+    # pred_scores = tuple of three floats
+    pred_labels, pred_scores = predictImage(im)
+
+    # Generate random number
+    rand_num = random.randint(0,2)
 
     # For rendering image
     data = BytesIO()
@@ -50,8 +59,9 @@ def results():
     return render_template(
         "results.html", 
         img_data = encoded_img_data.decode('utf-8'),
-        pred_label = pred_label,
-        pred_score = pred_score
+        fact_string = facts[pred_labels[0]][rand_num],
+        pred_label = pred_labels,
+        pred_score = pred_scores
     )
 
 if __name__ == '__main__':
