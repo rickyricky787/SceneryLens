@@ -3,3 +3,4 @@ numpy~=1.19.2
 tensorflow-cpu
 Pillow
 gunicorn
+requests
