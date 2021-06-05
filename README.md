@@ -1,4 +1,5 @@
 # SceneryLens
+[![Testing](https://github.com/rickyricky787/SceneryLens/actions/workflows/main.yml/badge.svg)](https://github.com/rickyricky787/SceneryLens/actions/workflows/main.yml)
 
 ## About the project
 SceneryLens a web app that detects the scenery of an image.
