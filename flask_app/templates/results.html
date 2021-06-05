@@ -1,0 +1,44 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="columns py-5">
+    <div class="column">
+      <!--Rendering image-->
+        <img src="data:image/png;base64,{{ img_data }}" width="500">
+    </div>
+    <div class="column">
+        <table class="table is-fullwidth">
+            <thead>
+              <tr>
+                <th>Label</th>
+                <th>Accuracy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{pred_label[0]}}</td>
+                <td>{{pred_score[0]}}</td>
+              </tr>
+              <tr>
+                <td>{{pred_label[1]}}</td>
+                <td>{{pred_score[1]}}</td>
+              </tr>
+              <tr>
+                <td>{{pred_label[2]}}</td>
+                <td>{{pred_score[2]}}</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>
+  <div class="pb-5">
+    <article class="message is-primary">
+      <div class="message-header has-text-centered">
+        <p>SceneryFact</p>
+      </div>
+      <div class="message-body">
+        {{fact_string}}
+      </div>
+    </article>
+  </div>
+{% endblock %}
