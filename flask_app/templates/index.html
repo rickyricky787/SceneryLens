@@ -25,6 +25,9 @@
         </div>
     
         <form method="POST" action={{ url_for("results") }} enctype="multipart/form-data">
+          <div class="field columns is-centered pb-3">
+            <input class="input is-primary" type="text" name="img_link" placeholder="Image Link" style="width: 50%;">
+          </div>
           
           <div id="file-upload-icon" class="file has-name columns is-centered">
             <label class="file-label">
@@ -43,10 +46,10 @@
             </label>
           </div>
     
-          <p>
-            <input class="button is-primary" type="submit" value="Submit" onclick="startProcessing()">
+          <div class="buttons is-centered">
+            <input class="button is-primary" type="submit" value="Submit">
             <button class="button is-light" onclick="listOfSceneries()">See list of sceneries</button>
-          </p>
+          </div>
         </form>
         {% block content %}{% endblock %}
       </div>
@@ -61,13 +64,6 @@
         if (fileInput.files.length > 0) {
           const fileName = document.querySelector('#file-upload-icon .file-name');
           fileName.textContent = fileInput.files[0].name;
-        }
-      }
-
-      // For alerting when a user does not upload an image
-      function startProcessing() {
-        if (fileInput.files.length == 0) {
-          alert("No image was uploaded!");
         }
       }
 

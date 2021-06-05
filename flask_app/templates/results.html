@@ -15,18 +15,14 @@
               </tr>
             </thead>
             <tbody>
+              {% for i in range(pred_score | length)%}
+              {% if pred_score[i] | float > 0.1 %}
               <tr>
-                <td>{{pred_label[0]}}</td>
-                <td>{{pred_score[0]}}</td>
+                <td>{{pred_label[i]}}</td>
+                <td>{{pred_score[i]}}</td>
               </tr>
-              <tr>
-                <td>{{pred_label[1]}}</td>
-                <td>{{pred_score[1]}}</td>
-              </tr>
-              <tr>
-                <td>{{pred_label[2]}}</td>
-                <td>{{pred_score[2]}}</td>
-              </tr>
+              {% endif %}
+              {% endfor %}
             </tbody>
         </table>
     </div>

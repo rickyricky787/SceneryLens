@@ -5,6 +5,7 @@ from PIL import Image
 import base64
 import json
 import random
+import requests
 from .predictImage import predictImage
 
 # Fetching facts from json
@@ -27,20 +28,30 @@ def index():
 # Route for results page
 @app.route("/", methods=['POST'])
 def results():
-    uploaded_img = request.files["file"]
-    img_name = uploaded_img.filename
+    if request.form["img_link"] == "":
+        uploaded_img = request.files["file"]
+        img_name = uploaded_img.filename
 
-    # Checks for the filetype of the file uploaded
-    if img_name != "":
-        file_ext = os.path.splitext(img_name)[1]
-        
-        # Checks for file extensions
-        if file_ext not in app.config['UPLOAD_EXTENSIONS']:
-            abort(415) # Unsorported media type
+        # Checks for the filetype of the file uploaded
+        if img_name != "":
+            file_ext = os.path.splitext(img_name)[1]
+            
+            # Checks for file extensions
+            if file_ext not in app.config['UPLOAD_EXTENSIONS']:
+                abort(415) # Unsorported media type
+        else:
+            return render_template("index.html")
+
+        im = Image.open(uploaded_img)
+    
     else:
-        return render_template("index.html")
-
-    im = Image.open(uploaded_img)
+        url = request.form["img_link"]
+        try:
+            response = requests.get(url)
+        except:
+            return render_template("index.html")
+        im = Image.open(BytesIO(response.content))
+    
     im = im.convert("RGB")
 
     # Do prediction stuff starting from here
