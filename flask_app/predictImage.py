@@ -1,3 +1,6 @@
+import os
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2" 
+
 import numpy as np
 from tensorflow.keras.models import model_from_json
 from tensorflow.keras.preprocessing.image import img_to_array
@@ -6,13 +9,13 @@ from PIL import Image
 
 def predictImage(img):
     # Load model
-    with open('../flask_app/model/xception_model.json', 'r') as f:
+    with open('flask_app/model/xception_model.json', 'r') as f:
         model_json = f.read()
 
     model = model_from_json(model_json)
 
     # Add weights
-    model.load_weights('../flask_app/model/xception_weights.h5')
+    model.load_weights('flask_app/model/xception_weights.h5')
 
     # Array of labels
     labels = [

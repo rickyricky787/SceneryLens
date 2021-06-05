@@ -5,10 +5,10 @@ from PIL import Image
 import base64
 import json
 import random
-from predictImage import predictImage
+from .predictImage import predictImage
 
 # Fetching facts from json
-with open('../flask_app/facts.json') as f:
+with open('flask_app/facts.json') as f:
   facts = json.load(f)
 
 app = Flask(__name__)
@@ -63,7 +63,4 @@ def results():
         pred_label = pred_labels,
         pred_score = pred_scores
     )
-
-if __name__ == '__main__':
-    app.run()
 
