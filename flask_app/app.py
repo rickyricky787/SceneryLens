@@ -6,12 +6,31 @@ import base64
 import json
 import random
 import requests
+from tensorflow.keras.models import model_from_json
 from .predictImage import predictImage
+
+# Load model
+with open('flask_app/model/xception_model.json', 'r') as f:
+    model_json = f.read()
+
+model = model_from_json(model_json)
+
+# Add weights
+model.load_weights('flask_app/model/xception_weights.h5')
+
+# Array of labels
+labels = [
+    "Alley", "Bridge", "Canyon", "Desert", "Downtown", 
+    "Forest", "Grotto", "Iceberg", "Lake", "Mountain", 
+    "Ocean", "Park", "Rock Arch", "Ruin", "Sky", 
+    "Snowfield", "Street", "Tower", "Village", "Waterfall"
+]
 
 # Fetching facts from json
 with open('flask_app/facts.json') as f:
   facts = json.load(f)
 
+# Initiating Flask app
 app = Flask(__name__)
 
 # Uploads can only be up to 15MB, this is checked automatically
@@ -57,7 +76,7 @@ def results():
     # Do prediction stuff starting from here
     # pred_tables = tuple of three strings
     # pred_scores = tuple of three floats
-    pred_labels, pred_scores = predictImage(im)
+    pred_labels, pred_scores = predictImage(model, labels, im)
 
     # Generate random number
     rand_num = random.randint(0,2)
