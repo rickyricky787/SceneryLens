@@ -26,9 +26,13 @@
     
         <form method="POST" action={{ url_for("results") }} enctype="multipart/form-data">
           <div class="field columns is-centered pb-3">
-            <input class="input is-primary" type="text" name="img_link" placeholder="Image Link" style="width: 50%;">
+            <input class="input is-primary" type="text" name="img_link" placeholder="Image URL" style="width: 50%;">
           </div>
-          
+
+          <div class="columns is-centered pb-3">
+            <p>OR</p>
+          </div>
+
           <div id="file-upload-icon" class="file has-name columns is-centered">
             <label class="file-label">
               <input class="file-input" type="file" name="file">
@@ -48,10 +52,25 @@
     
           <div class="buttons is-centered">
             <input class="button is-primary" type="submit" value="Submit">
-            <button class="button is-light" onclick="listOfSceneries()">See list of sceneries</button>
           </div>
         </form>
-        {% block content %}{% endblock %}
+        {% block content %}
+        
+        <div class="py-5">
+          <article class="message is-primary">
+            <div class="message-header has-text-centered">
+              <p>List of sceneries</p>
+            </div>
+            <div class="message-body">
+              alley - bridge - canyon - desert - downtown - 
+              forest - grotto - iceberg - lake - mountain - 
+              ocean - park - rock arch - ruin - sky - 
+              snowfield - street - tower - village - waterfall
+            </div>
+          </article>
+        </div>
+        
+        {% endblock %}
       </div>
       <footer class="has-text-centered py-2">
         <a href="https://github.com/rickyricky787/SceneryLens" target="_blank">Github</a>
@@ -65,17 +84,6 @@
           const fileName = document.querySelector('#file-upload-icon .file-name');
           fileName.textContent = fileInput.files[0].name;
         }
-      }
-
-      // For displaying list of sceneries
-      function listOfSceneries() {
-        alert(
-          "List of sceneries:\n" +
-          "alley - bridge - canyon - desert - downtown - " + 
-          "forest - grotto - iceberg - lake - mountain - " + 
-          "ocean - park - rock arch - ruin - sky - " + 
-          "snowfield - street - tower - village - waterfall"
-          );
       }
 
     </script>

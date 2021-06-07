@@ -1,6 +1,3 @@
-import os
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2" 
-
 import numpy as np
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.applications.xception import preprocess_input

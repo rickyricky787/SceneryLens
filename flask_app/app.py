@@ -1,4 +1,6 @@
 import os
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2" 
+
 from flask import Flask, render_template, request, abort
 from io import BytesIO
 from PIL import Image
@@ -57,7 +59,7 @@ def results():
             
             # Checks for file extensions
             if file_ext not in app.config['UPLOAD_EXTENSIONS']:
-                abort(415) # Unsorported media type
+                return render_template("index.html")
         else:
             return render_template("index.html")
 
@@ -73,10 +75,12 @@ def results():
     
     im = im.convert("RGB")
 
+    labels_copy = labels.copy()
+
     # Do prediction stuff starting from here
     # pred_tables = tuple of three strings
     # pred_scores = tuple of three floats
-    pred_labels, pred_scores = predictImage(model, labels, im)
+    pred_labels, pred_scores = predictImage(model, labels_copy, im)
 
     # Generate random number
     rand_num = random.randint(0,2)
